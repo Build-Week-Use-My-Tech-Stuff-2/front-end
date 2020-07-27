@@ -1,9 +1,12 @@
 import React from 'react'
+import {useHistory} from 'react-router-dom'
 
 export default function BuyerSignup(props) {
+const history = useHistory();
 //////////// PROPS ////////////
 const {
-    inputChange
+    inputChange,
+    forms
 } = props;
 
 //////////// HELPER FUNCTIONS ////////////
@@ -12,6 +15,11 @@ const onChange = event => {
     const value = event.target.value;
 
     inputChange(name, value)
+};
+
+const onSubmit = event => {
+    event.preventDefault();
+    history.push('/')
 }
 
     return (
@@ -20,8 +28,22 @@ const onChange = event => {
             <label>Username:
                 <input
                     type="text"
+                    name="username"
+                    value={forms.username}
+                    onChange={onChange}
                 ></input>
             </label>
+
+            <label>Password:
+                <input
+                    type="password"
+                    name="password"
+                    value={forms.password}
+                    onChange={onChange}
+                ></input>
+            </label>
+
+            <button onClick={onSubmit}>Submit</button>
         </div>
     )
 }
