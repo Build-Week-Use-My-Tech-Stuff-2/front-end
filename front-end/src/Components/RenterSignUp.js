@@ -6,7 +6,8 @@ export default function RenterSignup(props) {
     //////////// PROPS ////////////
     const {
         inputChange,
-        forms
+        forms,
+        formErrors
     } = props;
     
     //////////// HELPER FUNCTIONS ////////////
@@ -32,6 +33,7 @@ export default function RenterSignup(props) {
                         value={forms.username}
                         onChange={onChange}
                     ></input>
+                    <p>{formErrors.username}</p>
                 </label>
     
                 <label>Password:
@@ -41,6 +43,7 @@ export default function RenterSignup(props) {
                         value={forms.password}
                         onChange={onChange}
                     ></input>
+                    <p>{formErrors.password}</p>
                 </label>
     
                 <button onClick={onSubmit}>Submit</button>
