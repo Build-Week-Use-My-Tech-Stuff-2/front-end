@@ -3,6 +3,7 @@ import './App.css';
 import { BrowserRouter as Router, Route, Link, Switch} from 'react-router-dom'
 import BuyerSignUp from './Components/BuyerSignUp'
 import RenterSignUp from './Components/RenterSignUp'
+import CardForm from './renter/CardForm';
 
 function App() {
 //////////// INITIAL STATES ////////////
@@ -31,7 +32,6 @@ const inputChange = (name, value) => {
   return (
     <div className="App">
         <h1> WareShare </h1>
-
         <nav>
           <Link  to="/">Home</Link>
           <Link to="/renter-signup">Rent Hardware</Link>

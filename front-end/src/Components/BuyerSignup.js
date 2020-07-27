@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function BuyerSignup() {
+export default function BuyerSignup(props) {
 //////////// PROPS ////////////
 const {
     inputChange
@@ -16,7 +16,12 @@ const onChange = event => {
 
     return (
         <div>
-            
+            <h1>Buyer Sign-up</h1>
+            <label>Username:
+                <input
+                    type="text"
+                ></input>
+            </label>
         </div>
     )
 }
