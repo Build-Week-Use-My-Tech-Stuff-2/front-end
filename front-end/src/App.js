@@ -1,8 +1,10 @@
 import React from 'react';
 import './App.css';
 import { BrowserRouter as Router, Route, Link, Switch} from 'react-router-dom'
-import BuyerSignup from './Components/BuyerSignup'
-import RenterSignUp from './Components/RenterSignUp'
+import * as yup from 'yup'
+
+import RenterSignUp from './Components/RenterSignup'
+import BuyerSignUp from './Components/BuyerSignUp'
 
 function App() {
   return (

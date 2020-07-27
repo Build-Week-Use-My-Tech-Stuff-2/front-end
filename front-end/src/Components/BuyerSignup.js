@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function BuyerSignup() {
+export default function SellerSignup() {
     return (
         <div>
             
