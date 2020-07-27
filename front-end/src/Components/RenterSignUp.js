@@ -1,7 +1,7 @@
 import React from 'react'
 import {useHistory} from 'react-router-dom'
 
-export default function SellerSignup(props) {
+export default function RenterSignup(props) {
     const history = useHistory();
     //////////// PROPS ////////////
     const {

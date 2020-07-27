@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Link, Switch} from 'react-router-dom'
 import BuyerSignUp from './Components/BuyerSignUp'
 import RenterSignUp from './Components/RenterSignUp'
 import CardForm from './renter/CardForm';
+import Item from './Components/Item'
 
 function App() {
 //////////// INITIAL STATES ////////////
@@ -46,7 +47,7 @@ const inputChange = (name, value) => {
             <RenterSignUp inputChange={inputChange} forms={forms}/>
           </Route>
           <Route path="/">
-
+            <Item />
           </Route>
         </Switch>
     </div>
