@@ -1,9 +1,15 @@
 import React from 'react'
+import {useHistory} from 'react-router-dom'
+import {SignUpDiv, SubmitButton, LabelDiv, ErrorDiv} from './StyledSubComponents'
 
-export default function BuyerSignup(props) {
+export default function BuyerSignUp(props) {
+const history = useHistory();
 //////////// PROPS ////////////
 const {
-    inputChange
+    inputChange,
+    forms,
+    formErrors,
+    submit
 } = props;
 
 //////////// HELPER FUNCTIONS ////////////
@@ -12,16 +18,53 @@ const onChange = event => {
     const value = event.target.value;
 
     inputChange(name, value)
+};
+
+const onSubmit = event => {
+    event.preventDefault();
+    submit()
+    history.push('/')
 }
 
     return (
-        <div>
+        <SignUpDiv>
             <h1>Buyer Sign-up</h1>
-            <label>Username:
+            <LabelDiv>
+            <label htmlFor="username">Username:</label>
                 <input
                     type="text"
+                    name="username"
+                    value={forms.username}
+                    onChange={onChange}
                 ></input>
-            </label>
-        </div>
+            </LabelDiv>
+
+            <ErrorDiv><span>{formErrors.username}</span></ErrorDiv>
+
+            <LabelDiv>
+            <label htmlFor="password">Password:</label>
+                <input
+                    type="password"
+                    name="password"
+                    value={forms.password}
+                    onChange={onChange}
+                ></input>
+            </LabelDiv>
+
+            <ErrorDiv><span>{formErrors.password}</span></ErrorDiv>
+
+            <LabelDiv>
+            <label htmlFor="email">Email:</label>
+             <input
+                type="email"
+                name="email"
+                value={forms.email}
+                onChange={onChange}
+             ></input>
+            </LabelDiv>
+
+            <ErrorDiv><span></span></ErrorDiv>
+            <SubmitButton onClick={onSubmit}>Submit</SubmitButton>
+        </SignUpDiv>
     )
 }

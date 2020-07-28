@@ -1,55 +1,101 @@
 import React, { useState } from 'react';
 import './App.css';
-import { BrowserRouter as Router, Route, Link, Switch} from 'react-router-dom'
-import BuyerSignUp from './Components/BuyerSignUp'
+import { Route, Link, Switch} from 'react-router-dom'
+import axios from 'axios'
+import * as yup from 'yup'
+import styled from 'styled-components'
 import RenterSignUp from './Components/RenterSignUp'
-import CardForm from './renter/CardForm';
+import BuyerSignUp from './Components/BuyerSignUp'
+import CardForm from './renter/CardForm'
+import Item from './Components/Item'
+import formSchema from './Components/Validation/formSchema'
+import {AppDiv, LinkSpan, AppNav} from './Components/StyledSubComponents'
+
 
 function App() {
 //////////// INITIAL STATES ////////////
 const initialForm = {
   username: '',
-  password: ''
+  password: '',
+  email: ''
+  //Location
 };
 
 const initialFormErrors = {
   username: '',
-  password: ''
+  password: '',
+  email: ''
+ //Location
+
 };
 
 //////////// INITIAL STATES ////////////
 const [forms, setForms] = useState(initialForm);
 const [formErrors, setFormErrors] = useState(initialFormErrors);
 
+//////////// NETWORK HELPERS ////////////
+const postReq = (values) => {
+  axios.post("http://keg8893.herokuapp.com/createnewuser/", values)
+  .then(res => localStorage.setItem("token", res.data.payload))
+  .catch(err => {debugger})
+}
+
 //////////// FORM ACTIONS ////////////
 const inputChange = (name, value) => {
-  setForms({
+yup
+  .reach(formSchema, name)
+  .validate(value)
+  .then(valid => {
+    setFormErrors({
+      ...formErrors,
+      [name]: ""
+    })
+})
+  .catch(invalid => {
+    setFormErrors({
+      ...formErrors,
+      [name]: invalid.errors[0]
+    })
+})
+
+setForms({
     ...forms,
     [name]: value
-  })
+})
+}
+
+const submitNewUser = () => {
+  const payload = {
+    "username": forms.username,
+    "password": forms.password,
+    "primaryemail": forms.email,
+  }
+  postReq(payload)
 }
 
   return (
-    <div className="App">
+    <AppDiv>
+    
         <h1> WareShare </h1>
-        <nav>
-          <Link  to="/">Home</Link>
-          <Link to="/renter-signup">Rent Hardware</Link>
-          <Link to="/buyer-signup">Share Your Goods</Link>
-        </nav>
+        <AppNav>
+          <LinkSpan><Link style={{ textDecoration: 'none', color:'white', fontWeight: "900" }} to="/">Home</Link></LinkSpan>
+          <LinkSpan><Link style={{ textDecoration: 'none', color:'white', fontWeight: "900"  }} to="/renter-signup">Renter</Link></LinkSpan>
+          <LinkSpan><Link style={{ textDecoration: 'none', color:'white', fontWeight: "900"}} to="/buyer-signup">Buyer</Link></LinkSpan>
+        </AppNav>
         {/* Scrolling item gallery? */}
         <Switch>
           <Route path="/buyer-signup">
-            <BuyerSignUp inputChange={inputChange} forms={forms}/>
+            <BuyerSignUp formErrors={formErrors} submit={submitNewUser} inputChange={inputChange} forms={forms}/>
           </Route>
           <Route path="/renter-signup">
-            <RenterSignUp inputChange={inputChange} forms={forms}/>
+            <RenterSignUp formErrors={formErrors} submit={submitNewUser} inputChange={inputChange} forms={forms}/>
           </Route>
           <Route path="/">
-
+            <Item />
           </Route>
         </Switch>
-    </div>
+
+    </AppDiv>
   );
 }
 
