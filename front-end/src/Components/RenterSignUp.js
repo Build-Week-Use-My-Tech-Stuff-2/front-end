@@ -1,7 +1,7 @@
 import React from 'react'
 import {useHistory} from 'react-router-dom'
 import styled from 'styled-components'
-import {SignUpDiv, SubmitButton} from './StyledSubComponents'
+import {SignUpDiv, SubmitButton, LabelDiv, ErrorDiv} from './StyledSubComponents'
 
 export default function RenterSignUp(props) {
     const history = useHistory();
@@ -27,40 +27,45 @@ export default function RenterSignUp(props) {
         history.push('/')
     }
     
-        return (
-            <SignUpDiv>
-                <h1>Seller Sign-up</h1>
-                <label>Username:
-                    <input
-                        type="text"
-                        name="username"
-                        value={forms.username}
-                        onChange={onChange}
-                    ></input>
-                    <p>{formErrors.username}</p>
-                </label>
-    
-                <label>Password:
-                    <input
-                        type="password"
-                        name="password"
-                        value={forms.password}
-                        onChange={onChange}
-                    ></input>
-                    <p>{formErrors.password}</p>
-                </label>
+    return (
+        <SignUpDiv>
+            <h1>Renter Sign-up</h1>
+            <LabelDiv>
+            <label htmlFor="username">Username:</label>
+                <input
+                    type="text"
+                    name="username"
+                    value={forms.username}
+                    onChange={onChange}
+                ></input>
+            </LabelDiv>
 
-                <label>Email:
+            <ErrorDiv><span>{formErrors.username}</span></ErrorDiv>
+
+            <LabelDiv>
+            <label htmlFor="password">Password:</label>
+                <input
+                    type="password"
+                    name="password"
+                    value={forms.password}
+                    onChange={onChange}
+                ></input>
+            </LabelDiv>
+
+            <ErrorDiv><span>{formErrors.password}</span></ErrorDiv>
+
+            <LabelDiv>
+            <label htmlFor="email">Email:</label>
              <input
                 type="email"
                 name="email"
                 value={forms.email}
                 onChange={onChange}
              ></input>
-            </label>
-    
+            </LabelDiv>
+
+            <ErrorDiv><span></span></ErrorDiv>
             <SubmitButton onClick={onSubmit}>Submit</SubmitButton>
-            </SignUpDiv>
-        )
-    }
-    
+        </SignUpDiv>
+    )
+}

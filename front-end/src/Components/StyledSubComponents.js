@@ -7,7 +7,7 @@ padding: 1%;
 display: flex;
 flex-direction: column;
 align-items: center;
-width: 20%;
+width: 30%;
 margin: 5% auto 0 auto;
 `;
 
@@ -47,4 +47,20 @@ justify-content: space-around;
 margin: 0 auto;
 `;
 
-export {SignUpDiv, SubmitButton, AppDiv, LinkSpan, AppNav}
+const LabelDiv = styled.div`
+width: 80%;
+display: flex;
+justify-content: space-between;
+/* margin: 2% 0; */
+`;
+
+const ErrorDiv = styled.div`
+display: flex;
+justify-content: flex-end;
+color: red;
+font-size: .8rem;
+height: 10px;
+width: 80%;
+`;
+
+export {SignUpDiv, SubmitButton, AppDiv, LinkSpan, AppNav, LabelDiv, ErrorDiv}

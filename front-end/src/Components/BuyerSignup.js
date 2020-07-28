@@ -1,6 +1,6 @@
 import React from 'react'
 import {useHistory} from 'react-router-dom'
-import {SignUpDiv, SubmitButton} from './StyledSubComponents'
+import {SignUpDiv, SubmitButton, LabelDiv, ErrorDiv} from './StyledSubComponents'
 
 export default function BuyerSignUp(props) {
 const history = useHistory();
@@ -29,35 +29,41 @@ const onSubmit = event => {
     return (
         <SignUpDiv>
             <h1>Buyer Sign-up</h1>
-            <label>Username:
+            <LabelDiv>
+            <label htmlFor="username">Username:</label>
                 <input
                     type="text"
                     name="username"
                     value={forms.username}
                     onChange={onChange}
                 ></input>
-                <p>{formErrors.username}</p>
-            </label>
+            </LabelDiv>
 
-            <label>Password:
+            <ErrorDiv><span>{formErrors.username}</span></ErrorDiv>
+
+            <LabelDiv>
+            <label htmlFor="password">Password:</label>
                 <input
                     type="password"
                     name="password"
                     value={forms.password}
                     onChange={onChange}
                 ></input>
-                <p>{formErrors.password}</p>
-            </label>
+            </LabelDiv>
 
-            <label>Email:
+            <ErrorDiv><span>{formErrors.password}</span></ErrorDiv>
+
+            <LabelDiv>
+            <label htmlFor="email">Email:</label>
              <input
                 type="email"
                 name="email"
                 value={forms.email}
                 onChange={onChange}
              ></input>
-            </label>
+            </LabelDiv>
 
+            <ErrorDiv><span></span></ErrorDiv>
             <SubmitButton onClick={onSubmit}>Submit</SubmitButton>
         </SignUpDiv>
     )
