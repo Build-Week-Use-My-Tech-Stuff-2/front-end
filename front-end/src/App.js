@@ -3,12 +3,25 @@ import './App.css';
 import { Route, Link, Switch} from 'react-router-dom'
 import axios from 'axios'
 import * as yup from 'yup'
-
+import styled from 'styled-components'
 import RenterSignUp from './Components/RenterSignUp'
 import BuyerSignUp from './Components/BuyerSignUp'
 import CardForm from './renter/CardForm'
 import Item from './Components/Item'
 import formSchema from './Components/Validation/formSchema'
+
+const AppDiv = styled.div`
+min-height: 100vh;
+background: linear-gradient(#FFFFFF, #FF5A5F);
+text-align: center;
+display: flex;
+flex-direction: column;
+`;
+
+const LinkSpan = styled.span`
+padding: 0 1%;
+margin: 0 1%;
+`;
 
 function App() {
 //////////// INITIAL STATES ////////////
@@ -72,12 +85,13 @@ const submitNewUser = () => {
 }
 
   return (
-    <div className="App">
+    <AppDiv>
+    
         <h1> WareShare </h1>
         <nav>
-          <Link  to="/">Home</Link>
-          <Link to="/renter-signup">Rent Hardware</Link>
-          <Link to="/buyer-signup">Share Your Goods</Link>
+          <LinkSpan><Link to="/">Home</Link></LinkSpan>
+          <LinkSpan><Link to="/renter-signup">Rent Hardware</Link></LinkSpan>
+          <LinkSpan><Link to="/buyer-signup">Share Your Goods</Link></LinkSpan>
         </nav>
         {/* Scrolling item gallery? */}
         <Switch>
@@ -91,7 +105,8 @@ const submitNewUser = () => {
             <Item />
           </Route>
         </Switch>
-    </div>
+
+    </AppDiv>
   );
 }
 

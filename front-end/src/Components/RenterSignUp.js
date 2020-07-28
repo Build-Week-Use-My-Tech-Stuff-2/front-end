@@ -1,7 +1,9 @@
 import React from 'react'
 import {useHistory} from 'react-router-dom'
+import styled from 'styled-components'
+import {SignUpDiv, SubmitButton} from './StyledSubComponents'
 
-export default function RenterSignup(props) {
+export default function RenterSignUp(props) {
     const history = useHistory();
     //////////// PROPS ////////////
     const {
@@ -26,7 +28,7 @@ export default function RenterSignup(props) {
     }
     
         return (
-            <div>
+            <SignUpDiv>
                 <h1>Seller Sign-up</h1>
                 <label>Username:
                     <input
@@ -57,8 +59,8 @@ export default function RenterSignup(props) {
              ></input>
             </label>
     
-                <button onClick={onSubmit}>Submit</button>
-            </div>
+            <SubmitButton onClick={onSubmit}>Submit</SubmitButton>
+            </SignUpDiv>
         )
     }
     
