@@ -23,4 +23,28 @@ border-radius: 5px;
 font-weight: 600;
 `;
 
-export {SignUpDiv, SubmitButton}
+const AppDiv = styled.div`
+min-height: 100vh;
+background: linear-gradient(#FFFFFF, #FF5A5F);
+text-align: center;
+display: flex;
+flex-direction: column;
+`;
+
+const LinkSpan = styled.span`
+padding: 0 1%;
+margin: 0 1%;
+`;
+
+const AppNav = styled.nav`
+background: #FC642D;
+border: 2px solid #484848;
+border-radius: 10px;
+width: 30%;
+padding: .5%;
+display: flex;
+justify-content: space-around;
+margin: 0 auto;
+`;
+
+export {SignUpDiv, SubmitButton, AppDiv, LinkSpan, AppNav}

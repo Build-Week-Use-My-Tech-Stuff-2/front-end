@@ -9,19 +9,8 @@ import BuyerSignUp from './Components/BuyerSignUp'
 import CardForm from './renter/CardForm'
 import Item from './Components/Item'
 import formSchema from './Components/Validation/formSchema'
+import {AppDiv, LinkSpan, AppNav} from './Components/StyledSubComponents'
 
-const AppDiv = styled.div`
-min-height: 100vh;
-background: linear-gradient(#FFFFFF, #FF5A5F);
-text-align: center;
-display: flex;
-flex-direction: column;
-`;
-
-const LinkSpan = styled.span`
-padding: 0 1%;
-margin: 0 1%;
-`;
 
 function App() {
 //////////// INITIAL STATES ////////////
@@ -88,11 +77,11 @@ const submitNewUser = () => {
     <AppDiv>
     
         <h1> WareShare </h1>
-        <nav>
-          <LinkSpan><Link to="/">Home</Link></LinkSpan>
-          <LinkSpan><Link to="/renter-signup">Rent Hardware</Link></LinkSpan>
-          <LinkSpan><Link to="/buyer-signup">Share Your Goods</Link></LinkSpan>
-        </nav>
+        <AppNav>
+          <LinkSpan><Link style={{ textDecoration: 'none', color:'white', fontWeight: "900" }} to="/">Home</Link></LinkSpan>
+          <LinkSpan><Link style={{ textDecoration: 'none', color:'white', fontWeight: "900"  }} to="/renter-signup">Rent Hardware</Link></LinkSpan>
+          <LinkSpan><Link style={{ textDecoration: 'none', color:'white', fontWeight: "900"}} to="/buyer-signup">Share Your Goods</Link></LinkSpan>
+        </AppNav>
         {/* Scrolling item gallery? */}
         <Switch>
           <Route path="/buyer-signup">
