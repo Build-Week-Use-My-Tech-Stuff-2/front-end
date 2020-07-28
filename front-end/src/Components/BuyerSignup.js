@@ -9,7 +9,8 @@ const {
     inputChange,
     forms,
     formErrors,
-    submit
+    submit,
+    disabled
 } = props;
 
 //////////// HELPER FUNCTIONS ////////////
@@ -64,7 +65,7 @@ const onSubmit = event => {
             </LabelDiv>
 
             <ErrorDiv><span></span></ErrorDiv>
-            <SubmitButton onClick={onSubmit}>Submit</SubmitButton>
+            <SubmitButton disabled={disabled} onClick={onSubmit}>Submit</SubmitButton>
         </SignUpDiv>
     )
 }

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import { Route, Link, Switch} from 'react-router-dom'
 import axios from 'axios'
@@ -25,13 +25,14 @@ const initialFormErrors = {
   username: '',
   password: '',
   email: ''
- //Location
-
 };
 
-//////////// INITIAL STATES ////////////
+const initialDisabled = true;
+
+//////////// STATES ////////////
 const [forms, setForms] = useState(initialForm);
 const [formErrors, setFormErrors] = useState(initialFormErrors);
+const [disabled, setDisabled] = useState(initialDisabled);
 
 //////////// NETWORK HELPERS ////////////
 const postReq = (values) => {
@@ -73,6 +74,14 @@ const submitNewUser = () => {
   postReq(payload)
 }
 
+//////////// SIDE EFFECTS ////////////
+useEffect(() => {
+  formSchema.isValid(forms)
+    .then(valid => {
+    setDisabled(!valid)
+})
+}, [forms])
+
   return (
     <AppDiv>
     
@@ -85,10 +94,10 @@ const submitNewUser = () => {
         {/* Scrolling item gallery? */}
         <Switch>
           <Route path="/buyer-signup">
-            <BuyerSignUp formErrors={formErrors} submit={submitNewUser} inputChange={inputChange} forms={forms}/>
+            <BuyerSignUp disabled={disabled} formErrors={formErrors} submit={submitNewUser} inputChange={inputChange} forms={forms}/>
           </Route>
           <Route path="/renter-signup">
-            <RenterSignUp formErrors={formErrors} submit={submitNewUser} inputChange={inputChange} forms={forms}/>
+            <RenterSignUp disabled={disabled} formErrors={formErrors} submit={submitNewUser} inputChange={inputChange} forms={forms}/>
           </Route>
           <Route path="/">
             <Item />
