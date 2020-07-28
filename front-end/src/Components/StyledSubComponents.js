@@ -51,7 +51,6 @@ const LabelDiv = styled.div`
 width: 80%;
 display: flex;
 justify-content: space-between;
-/* margin: 2% 0; */
 `;
 
 const ErrorDiv = styled.div`
