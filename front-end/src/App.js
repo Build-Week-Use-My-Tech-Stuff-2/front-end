@@ -79,7 +79,7 @@ useEffect(() => {
   formSchema.isValid(forms)
     .then(valid => {
     setDisabled(!valid)
-  })
+})
 }, [forms])
 
   return (
