@@ -10,7 +10,8 @@ export default function RenterSignUp(props) {
         inputChange,
         forms,
         formErrors,
-        submit
+        submit,
+        disabled
     } = props;
     
     //////////// HELPER FUNCTIONS ////////////
@@ -65,7 +66,7 @@ export default function RenterSignUp(props) {
             </LabelDiv>
 
             <ErrorDiv><span></span></ErrorDiv>
-            <SubmitButton onClick={onSubmit}>Submit</SubmitButton>
+            <SubmitButton disabled={disabled} onClick={onSubmit}>Submit</SubmitButton>
         </SignUpDiv>
     )
 }
