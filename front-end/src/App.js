@@ -10,7 +10,8 @@ import CardForm from './renter/CardForm'
 import Item from './Components/Item'
 import formSchema from './Components/Validation/formSchema'
 import {AppDiv, LinkSpan, AppNav} from './Components/StyledSubComponents'
-
+import RenterLogin from './renter/RenterLogin'
+import CreateForm from './renter/CreateForm'
 
 function App() {
 //////////// INITIAL STATES ////////////
@@ -37,8 +38,10 @@ const [disabled, setDisabled] = useState(initialDisabled);
 //////////// NETWORK HELPERS ////////////
 const postReq = (values) => {
   axios.post("http://keg8893.herokuapp.com/createnewuser/", values)
-  .then(res => localStorage.setItem("token", res.data.payload))
-  .catch(err => {debugger})
+  .then(res => {
+    console.log(res);
+    localStorage.setItem("token", res.data.payload)})
+  .catch(err => console.log(err))
 }
 
 //////////// FORM ACTIONS ////////////
@@ -90,9 +93,19 @@ useEffect(() => {
           <LinkSpan><Link style={{ textDecoration: 'none', color:'white', fontWeight: "900" }} to="/">Home</Link></LinkSpan>
           <LinkSpan><Link style={{ textDecoration: 'none', color:'white', fontWeight: "900"  }} to="/renter-signup">Renter</Link></LinkSpan>
           <LinkSpan><Link style={{ textDecoration: 'none', color:'white', fontWeight: "900"}} to="/buyer-signup">Buyer</Link></LinkSpan>
+          <LinkSpan><Link style={{ textDecoration: 'none', color:'white', fontWeight: "900"}} to="/renter-login">Login(renter)</Link></LinkSpan>
         </AppNav>
         {/* Scrolling item gallery? */}
         <Switch>
+
+          <Route path="/renter-login">
+            <RenterLogin />
+          </Route>
+
+          <Route path="/create-form">
+            <CreateForm />
+          </Route>
+
           <Route path="/buyer-signup">
             <BuyerSignUp disabled={disabled} formErrors={formErrors} submit={submitNewUser} inputChange={inputChange} forms={forms}/>
           </Route>

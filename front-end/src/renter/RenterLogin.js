@@ -3,6 +3,7 @@ import axiosWithAuth from './utils/axiosWithAuth';
 import {useHistory,Link} from "react-router-dom";
 
 
+
 const RenterLogin = () =>{
     const [cred, setCred]= useState({
         username: '',
@@ -43,7 +44,7 @@ const RenterLogin = () =>{
                     value={cred.password}
                 />
                 <button type="submit">Login</button>
-                <Link to="/">Create Acount</Link>
+                <Link to="/create-form">Create Acount</Link>
             </form>
         </div>
     )
