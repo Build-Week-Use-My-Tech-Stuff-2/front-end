@@ -7,7 +7,8 @@ export default function RenterSignup(props) {
     const {
         inputChange,
         forms,
-        formErrors
+        formErrors,
+        submit
     } = props;
     
     //////////// HELPER FUNCTIONS ////////////
@@ -20,6 +21,7 @@ export default function RenterSignup(props) {
     
     const onSubmit = event => {
         event.preventDefault();
+        submit()
         history.push('/')
     }
     
@@ -45,6 +47,15 @@ export default function RenterSignup(props) {
                     ></input>
                     <p>{formErrors.password}</p>
                 </label>
+
+                <label>Email:
+             <input
+                type="email"
+                name="email"
+                value={forms.email}
+                onChange={onChange}
+             ></input>
+            </label>
     
                 <button onClick={onSubmit}>Submit</button>
             </div>

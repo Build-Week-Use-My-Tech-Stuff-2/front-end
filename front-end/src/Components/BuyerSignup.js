@@ -7,7 +7,8 @@ const history = useHistory();
 const {
     inputChange,
     forms,
-    formErrors
+    formErrors,
+    submit
 } = props;
 
 //////////// HELPER FUNCTIONS ////////////
@@ -20,6 +21,7 @@ const onChange = event => {
 
 const onSubmit = event => {
     event.preventDefault();
+    submit()
     history.push('/')
 }
 
@@ -44,6 +46,15 @@ const onSubmit = event => {
                     onChange={onChange}
                 ></input>
                 <p>{formErrors.password}</p>
+            </label>
+
+            <label>Email:
+             <input
+                type="email"
+                name="email"
+                value={forms.email}
+                onChange={onChange}
+             ></input>
             </label>
 
             <button onClick={onSubmit}>Submit</button>

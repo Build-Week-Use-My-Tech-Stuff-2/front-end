@@ -14,6 +14,9 @@ export default function Item() {
             <img src={"https://picsum.photos/200"}></img>
             <h3>Name:</h3>
             <h4>Price:</h4>
+            {/* Availability [create a component?] [needs state] */}
+            {/* Button routes to a checkout screen for buyers, edit details for renters 
+            (On another note, for readability's sake we should change 'renters' to 'sellers') */}
         </ItemDiv>
     )
 }
