@@ -18,17 +18,18 @@ export default function Shop() {
 const loadItems = () => {
     axios.get("http://keg8893.herokuapp.com/items/items")
     .then( res => {
+      console.log(res);
       setItems(res.data)
+    })
     .catch( err => {
       debugger
     })
-    })
   }
 
-  // useEffect( () => {
-  //   loadItems()
-  // }, []
-  // )
+  useEffect( () => {
+    loadItems()
+  }, []
+  )
     return (
         <div>
            <SearchBar search={search} setSearch={setSearch}/>
