@@ -3,7 +3,7 @@ import {useHistory} from 'react-router-dom'
 import styled from 'styled-components'
 import {SignUpDiv, SubmitButton, LabelDiv, ErrorDiv} from './StyledSubComponents'
 
-export default function RenterSignUp(props) {
+export default function SignUp(props) {
     const history = useHistory();
     //////////// PROPS ////////////
     const {
@@ -25,7 +25,7 @@ export default function RenterSignUp(props) {
     const onSubmit = event => {
         event.preventDefault();
         submit()
-        history.push('/')
+        history.push('/login')
     }
     
     return (

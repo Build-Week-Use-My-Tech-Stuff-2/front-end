@@ -1,9 +1,9 @@
 import React, {useState} from "react";
-import axiosWithAuth from './utils/axiosWithAuth';
+import axiosWithAuth from '../renter/utils/axiosWithAuth';
 import {useHistory,Link} from "react-router-dom";
 
 
-const RenterLogin = () =>{
+const Login = () =>{
     const [cred, setCred]= useState({
         username: '',
         password: '',
@@ -26,7 +26,7 @@ const RenterLogin = () =>{
     }
     return(
         <div>
-            <h1>Renter's Login</h1>
+            <h1>Login</h1>
             <form onSubmit={handleSubmit}>
                 <input
                     placeholder="username"
@@ -43,9 +43,9 @@ const RenterLogin = () =>{
                     value={cred.password}
                 />
                 <button type="submit">Login</button>
-                <Link to="/">Create Acount</Link>
+                <Link to="/sign-up">Create Acount</Link>
             </form>
         </div>
     )
 }
-export default RenterLogin;
+export default Login;
