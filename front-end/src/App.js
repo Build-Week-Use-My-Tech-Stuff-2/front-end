@@ -108,7 +108,7 @@ useEffect(() => {
 
   return (
     <MainData.Provider value={{items}}>
-    
+      <AppDiv>
         {/* Scrolling item gallery? */}
         <Switch>
           
@@ -139,6 +139,7 @@ useEffect(() => {
 
       </AppDiv>
     </MainData.Provider>
+  
   );
 }
 
