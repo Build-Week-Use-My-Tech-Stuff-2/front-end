@@ -1,20 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
-import { Route, Link, Switch} from 'react-router-dom'
+import { Route, Link, Switch, NavLink} from 'react-router-dom'
 import axios from 'axios'
 import * as yup from 'yup'
 import styled from 'styled-components'
-import RenterSignUp from './Components/RenterSignUp'
-import BuyerSignUp from './Components/BuyerSignup';
+import SignUp from './Components/SignUp'
 import CardForm from './renter/CardForm'
+import Login from './Components/Login'
 import Item from './Components/Item'
 import formSchema from './Components/Validation/formSchema'
-import {AppDiv, LinkSpan, AppNav} from './Components/StyledSubComponents'
 import RenterLogin from './renter/RenterLogin';
 import CreateForm from './renter/CreateForm';
 import axiosWithAuth from './renter/utils/axiosWithAuth';
 import {MainData} from './renter/context/MainData'
 
+import RenterDashboard from './Components/RenterDashboard';
+import {LinkSpan, AppNav, AppDiv} from './Components/StyledSubComponents'
 
 
 function App() {
@@ -59,7 +60,9 @@ const [disabled, setDisabled] = useState(initialDisabled);
 //////////// NETWORK HELPERS ////////////
 const postReq = (values) => {
   axios.post("http://keg8893.herokuapp.com/createnewuser/", values)
-  .then(res => localStorage.setItem("token", res.data.payload))
+  .then(res => {
+    localStorage.setItem("token", res.data.payload)})
+  
   .catch(err => {debugger})
 }
 
@@ -95,7 +98,6 @@ const submitNewUser = () => {
   }
   postReq(payload)
 }
-
 //////////// SIDE EFFECTS ////////////
 useEffect(() => {
   formSchema.isValid(forms)
@@ -107,27 +109,32 @@ useEffect(() => {
   return (
     <MainData.Provider value={{items}}>
     
-      <AppDiv>
-        <h1> WareShare </h1>
-        <AppNav>
-          <LinkSpan><Link style={{ textDecoration: 'none', color:'white', fontWeight: "900" }} to="/">Home</Link></LinkSpan>
-          <LinkSpan><Link style={{ textDecoration: 'none', color:'white', fontWeight: "900"  }} to="/renter-signup">Renter</Link></LinkSpan>
-          <LinkSpan><Link style={{ textDecoration: 'none', color:'white', fontWeight: "900"}} to="/buyer-signup">Buyer</Link></LinkSpan>
-          <LinkSpan><Link style={{ textDecoration: 'none', color:'white', fontWeight: "900"}} to="/createform">Create Account</Link></LinkSpan>
-        </AppNav>
         {/* Scrolling item gallery? */}
         <Switch>
-         
           
-          <Route path="/buyer-signup">
-            <BuyerSignUp disabled={disabled} formErrors={formErrors} submit={submitNewUser} inputChange={inputChange} forms={forms}/>
+
+          <Route path="/dashboard">
+              <RenterDashboard/>
+          </Route>  
+        
+          <Route path={["/", "/login", "/signup"]}>
+              <h1> WareShare </h1>
+              <AppNav>
+                  <LinkSpan><Link style={{ textDecoration: 'none', color:'white', fontWeight: "900" }} to="/">Home</Link></LinkSpan>
+                  <LinkSpan><Link style={{ textDecoration: 'none', color:'white', fontWeight: "900"  }} to="/signup">Sign Up</Link></LinkSpan>
+                  <LinkSpan><Link style={{ textDecoration: 'none', color:'white', fontWeight: "900"  }} to="/login">Login</Link></LinkSpan>
+              </AppNav>
+
+                  <Route path="/signup">
+                      <SignUp disabled={disabled} formErrors={formErrors} submit={submitNewUser} inputChange={inputChange} forms={forms}/>
+                  </Route>
+
+                  <Route path="/login">
+                      <Login formErrors={formErrors} setFormErrors={setFormErrors} />
+                  </Route>
+                  
           </Route>
-          <Route path="/renter-signup">
-            <RenterSignUp disabled={disabled} formErrors={formErrors} submit={submitNewUser} inputChange={inputChange} forms={forms}/>
-          </Route>
-          <Route path="/">
-            <Item />
-          </Route>
+
         </Switch>
 
       </AppDiv>
