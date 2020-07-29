@@ -19,19 +19,19 @@ const loadItems = () => {
     axios.get("http://keg8893.herokuapp.com/items/items")
     .then( res => {
       setItems(res.data)
-    .catch( err => {
-      debugger
     })
-    })
+      .catch( err => {
+        debugger
+      })
   }
 
-  // useEffect( () => {
-  //   loadItems()
-  // }, []
-  // )
+  useEffect( () => {
+    loadItems()
+  }, []
+  )
     return (
         <div>
-           <SearchBar search={search} setSearch={setSearch}/>
+           <SearchBar search={search} setItems={setItems} setSearch={setSearch}/>
             <section id="gallery">
                 {
                 items.map( item => {
