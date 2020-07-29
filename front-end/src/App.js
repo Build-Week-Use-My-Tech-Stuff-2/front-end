@@ -4,9 +4,9 @@ import { Route, Link, Switch} from 'react-router-dom'
 import axios from 'axios'
 import * as yup from 'yup'
 import styled from 'styled-components'
-import RenterSignUp from './Components/RenterSignUp'
-import BuyerSignUp from './Components/BuyerSignUp'
+import SignUp from './Components/SignUp'
 import CardForm from './renter/CardForm'
+import Login from './Components/Login'
 import Item from './Components/Item'
 import formSchema from './Components/Validation/formSchema'
 import {AppDiv, LinkSpan, AppNav} from './Components/StyledSubComponents'
@@ -37,7 +37,9 @@ const [disabled, setDisabled] = useState(initialDisabled);
 //////////// NETWORK HELPERS ////////////
 const postReq = (values) => {
   axios.post("http://keg8893.herokuapp.com/createnewuser/", values)
-  .then(res => localStorage.setItem("token", res.data.payload))
+  .then(res => {
+    localStorage.setItem("token", res.data.payload)})
+  
   .catch(err => {debugger})
 }
 
@@ -74,6 +76,16 @@ const submitNewUser = () => {
   postReq(payload)
 }
 
+const loadItems = () => {
+  axios.get("http://keg8893.herokuapp.com/items/items")
+  .then( res => {
+    console.log(res.data)
+  .catch( err => {
+    debugger
+  })
+  })
+}
+
 //////////// SIDE EFFECTS ////////////
 useEffect(() => {
   formSchema.isValid(forms)
@@ -88,16 +100,17 @@ useEffect(() => {
         <h1> WareShare </h1>
         <AppNav>
           <LinkSpan><Link style={{ textDecoration: 'none', color:'white', fontWeight: "900" }} to="/">Home</Link></LinkSpan>
-          <LinkSpan><Link style={{ textDecoration: 'none', color:'white', fontWeight: "900"  }} to="/renter-signup">Renter</Link></LinkSpan>
-          <LinkSpan><Link style={{ textDecoration: 'none', color:'white', fontWeight: "900"}} to="/buyer-signup">Buyer</Link></LinkSpan>
+          <LinkSpan><Link style={{ textDecoration: 'none', color:'white', fontWeight: "900"  }} to="/signup">Sign Up</Link></LinkSpan>
+          <LinkSpan><Link style={{ textDecoration: 'none', color:'white', fontWeight: "900"  }} to="/login">Login</Link></LinkSpan>
         </AppNav>
         {/* Scrolling item gallery? */}
         <Switch>
-          <Route path="/buyer-signup">
-            <BuyerSignUp disabled={disabled} formErrors={formErrors} submit={submitNewUser} inputChange={inputChange} forms={forms}/>
+         
+          <Route path="/signup">
+            <SignUp disabled={disabled} formErrors={formErrors} submit={submitNewUser} inputChange={inputChange} forms={forms}/>
           </Route>
-          <Route path="/renter-signup">
-            <RenterSignUp disabled={disabled} formErrors={formErrors} submit={submitNewUser} inputChange={inputChange} forms={forms}/>
+          <Route path="/login">
+            <Login formErrors={formErrors} setFormErrors={setFormErrors} />
           </Route>
           <Route path="/">
             <Item />
