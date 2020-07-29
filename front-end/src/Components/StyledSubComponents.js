@@ -7,7 +7,7 @@ padding: 1%;
 display: flex;
 flex-direction: column;
 align-items: center;
-width: 30%;
+width: 20%;
 margin: 5% auto 0 auto;
 `;
 
