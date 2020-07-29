@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
-import { Route, Link, Switch} from 'react-router-dom'
+import { Route, Link, Switch, NavLink} from 'react-router-dom'
 import axios from 'axios'
 import * as yup from 'yup'
 import styled from 'styled-components'
@@ -9,8 +9,8 @@ import CardForm from './renter/CardForm'
 import Login from './Components/Login'
 import Item from './Components/Item'
 import formSchema from './Components/Validation/formSchema'
-import {AppDiv, LinkSpan, AppNav} from './Components/StyledSubComponents'
 import RenterDashboard from './Components/RenterDashboard';
+import {LinkSpan, AppNav, AppDiv} from './Components/StyledSubComponents'
 
 
 function App() {
@@ -87,27 +87,32 @@ useEffect(() => {
   return (
     <AppDiv>
     
-        <h1> WareShare </h1>
-        <AppNav>
-          <LinkSpan><Link style={{ textDecoration: 'none', color:'white', fontWeight: "900" }} to="/">Home</Link></LinkSpan>
-          <LinkSpan><Link style={{ textDecoration: 'none', color:'white', fontWeight: "900"  }} to="/signup">Sign Up</Link></LinkSpan>
-          <LinkSpan><Link style={{ textDecoration: 'none', color:'white', fontWeight: "900"  }} to="/login">Login</Link></LinkSpan>
-        </AppNav>
         {/* Scrolling item gallery? */}
         <Switch>
-         
-          <Route path="/signup">
-            <SignUp disabled={disabled} formErrors={formErrors} submit={submitNewUser} inputChange={inputChange} forms={forms}/>
+          
+
+          <Route path="/dashboard">
+              <RenterDashboard/>
+          </Route>  
+        
+          <Route path={["/", "/login", "/signup"]}>
+              <h1> WareShare </h1>
+              <AppNav>
+                  <LinkSpan><Link style={{ textDecoration: 'none', color:'white', fontWeight: "900" }} to="/">Home</Link></LinkSpan>
+                  <LinkSpan><Link style={{ textDecoration: 'none', color:'white', fontWeight: "900"  }} to="/signup">Sign Up</Link></LinkSpan>
+                  <LinkSpan><Link style={{ textDecoration: 'none', color:'white', fontWeight: "900"  }} to="/login">Login</Link></LinkSpan>
+              </AppNav>
+
+                  <Route path="/signup">
+                      <SignUp disabled={disabled} formErrors={formErrors} submit={submitNewUser} inputChange={inputChange} forms={forms}/>
+                  </Route>
+
+                  <Route path="/login">
+                      <Login formErrors={formErrors} setFormErrors={setFormErrors} />
+                  </Route>
+                  
           </Route>
-          <Route path="/login">
-            <Login formErrors={formErrors} setFormErrors={setFormErrors} />
-          </Route>
-          <Route path="/dashboard/:component">
-            <RenterDashboard/>
-          </Route>
-          <Route path="/">
-            <Item />
-          </Route>
+
         </Switch>
 
     </AppDiv>
