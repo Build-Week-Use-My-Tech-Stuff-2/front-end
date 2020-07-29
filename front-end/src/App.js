@@ -10,6 +10,7 @@ import Login from './Components/Login'
 import Item from './Components/Item'
 import formSchema from './Components/Validation/formSchema'
 import {AppDiv, LinkSpan, AppNav} from './Components/StyledSubComponents'
+import RenterDashboard from './Components/RenterDashboard';
 
 
 function App() {
@@ -75,17 +76,6 @@ const submitNewUser = () => {
   }
   postReq(payload)
 }
-
-const loadItems = () => {
-  axios.get("http://keg8893.herokuapp.com/items/items")
-  .then( res => {
-    console.log(res.data)
-  .catch( err => {
-    debugger
-  })
-  })
-}
-
 //////////// SIDE EFFECTS ////////////
 useEffect(() => {
   formSchema.isValid(forms)
@@ -111,6 +101,9 @@ useEffect(() => {
           </Route>
           <Route path="/login">
             <Login formErrors={formErrors} setFormErrors={setFormErrors} />
+          </Route>
+          <Route path="/dashboard/:component">
+            <RenterDashboard/>
           </Route>
           <Route path="/">
             <Item />
