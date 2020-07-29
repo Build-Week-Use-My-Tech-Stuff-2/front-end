@@ -1,7 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 
-export default function SearchBar({setItems, search, setSearch}) {
+export default function SearchBar({setItems, reset, search, setSearch}) {
 
     const onSearchChange = (evt) => {
         const value = evt.target.value
@@ -15,6 +15,10 @@ export default function SearchBar({setItems, search, setSearch}) {
         }
         )
     }
+
+    const resetItems = () => {
+        reset()
+    }
     return (
         <div>
             <input
@@ -26,7 +30,7 @@ export default function SearchBar({setItems, search, setSearch}) {
             ></input>
 
             <button onClick={onSearchSubmit}>Search</button>
-            {/* view all btn */}
+            <button onClick={resetItems}>Display All</button>
         </div>
     )
 }
