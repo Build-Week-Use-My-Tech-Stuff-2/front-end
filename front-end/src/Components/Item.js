@@ -9,11 +9,13 @@ max-width: 15%;
 `;
 
 export default function Item({item}) {
+
     return (
         <ItemDiv>
             <img src={item.itemimg}></img>
             <h3>{`Name: ${item.itemname}`}</h3>
             <h4>{`Price: ${item.itemrate}`}</h4>
+
         </ItemDiv>
     )
 }
