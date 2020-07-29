@@ -1,10 +1,19 @@
 import React from 'react'
+import axios from 'axios'
 
-export default function SearchBar({search, setSearch}) {
+export default function SearchBar({setItems, search, setSearch}) {
 
     const onSearchChange = (evt) => {
         const value = evt.target.value
         setSearch(value)
+    }
+
+    const onSearchSubmit = () => {
+        axios.get(`http://keg8893.herokuapp.com/items/item/name/like/${search}`)
+        .then( res => {
+            setItems( res.data )
+        }
+        )
     }
     return (
         <div>
@@ -16,7 +25,7 @@ export default function SearchBar({search, setSearch}) {
                 value={search}
             ></input>
 
-            <button>Search</button>
+            <button onClick={onSearchSubmit}>Search</button>
             {/* view all btn */}
         </div>
     )

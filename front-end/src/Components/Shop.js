@@ -21,9 +21,10 @@ const loadItems = () => {
       console.log(res);
       setItems(res.data)
     })
-    .catch( err => {
-      debugger
-    })
+      .catch( err => {
+        debugger
+      })
+
   }
 
   useEffect( () => {
@@ -32,7 +33,7 @@ const loadItems = () => {
   )
     return (
         <div>
-           <SearchBar search={search} setSearch={setSearch}/>
+           <SearchBar search={search} setItems={setItems} setSearch={setSearch}/>
             <section id="gallery">
                 {
                 items.map( item => {
