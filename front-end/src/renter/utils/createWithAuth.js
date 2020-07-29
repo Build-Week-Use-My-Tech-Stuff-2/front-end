@@ -6,9 +6,9 @@ const axiosWithAuth =() => {
 
   return axios.create({
     headers: {
-      Authorization: `Bearer ${token}`
+      Authorization: token
     },
     baseURL: 'https://keg8893.herokuapp.com'
   });
 };
-export default axiosWithAuth;
+export default axiosWithAuth

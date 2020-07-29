@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import axiosWithAuth from './utils/axiosWithAuth';
+import axios from 'axios';
 import {useHistory,Link} from "react-router-dom";
 
 
@@ -15,14 +15,19 @@ const RenterLogin = () =>{
     }
     const handleSubmit= e =>{
         e.preventDefault();
-            axiosWithAuth()
-            .post("/login", cred)
-            .then(res =>{
-                console.log("login page data: ", res)
-                localStorage.setItem("token", res.data.payload)
-                 push("/cardform") 
-            })
-            .catch(err=> console.log("this is the error from login: ", err))
+        axios.post('https://keg8893.herokuapp.com/login', `grant_type=password&username=${cred.username}&password=${cred.password}`, {
+            headers: {
+              // btoa is converting our client id/client secret into base64
+              //if auth breaks, insert `bearer`
+              Authorization: `Basic ${btoa('OAUTHCLIENTID:OAUTHCLIENTSECRET')}`,
+              'Content-Type': 'application/x-www-form-urlencoded'
+            }
+          })
+          .then(res => {
+            console.log('data:', res.data)
+            localStorage.setItem('token', res.data.access_token);
+            push('/cardform')
+          })
     }
     return(
         <div>

@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import axiosWithAuth from './utils/axiosWithAuth';
+import createWithAuth from './utils/createWithAuth'
 import {useHistory} from "react-router-dom";
 
 
@@ -16,12 +16,12 @@ const CreateForm = () =>{
     }
     const handleSubmit= e =>{
         e.preventDefault();
-            axiosWithAuth()
+            createWithAuth()
             .post('/createnewuser', cred)
             .then(res =>{
                 console.log("login page data: ", res)
-                localStorage.setItem("token", res.data.payload)
-                 push("/cardform")
+                localStorage.setItem("token", res.data.access_token)
+                 push("/renterlogin")
             })
             .catch(err=> console.log("this is the error from login: ", err))
     }

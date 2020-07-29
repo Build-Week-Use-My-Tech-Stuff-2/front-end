@@ -1,8 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
-import {Link} from 'react-router-dom'
+import {Link} from 'react-router-dom';
+import {MainData} from './context/MainData';
 
 const CardForm = ()=>{
+    const itemz= useContext(MainData);
+    console.log('waaaaaaaat yay: ', itemz)
 
     const InputStyled= styled.input`
     display:flex;
@@ -18,18 +21,15 @@ const CardForm = ()=>{
         itemrate:'',
         itemimg: ''
     }
-    {/*this is where the dummy data lives */}
-    const [items, setItems]= useState([]);
-
+    
     const [newItems,setNewItems]=useState(initialItem);
-
-    {/*useEffect to get /items */}
 
     const handleChange = e =>{
         setNewItems({...newItems,[e.target.name]: e.target.value })
     }
 
     {/*add new item using axios*/}
+
 
     return(
         <div>
