@@ -25,10 +25,10 @@ const loadItems = () => {
     })
   }
 
-  useEffect( () => {
-    loadItems()
-  }, []
-  )
+  // useEffect( () => {
+  //   loadItems()
+  // }, []
+  // )
     return (
         <div>
            <SearchBar search={search} setSearch={setSearch}/>
