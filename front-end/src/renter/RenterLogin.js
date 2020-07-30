@@ -48,7 +48,7 @@ const RenterLogin = () =>{
                     value={cred.password}
                 />
                 <button type="submit">Login</button>
-                <Link to="/">Create Acount</Link>
+                <Link to="/createform">Create Acount</Link>
             </form>
         </div>
     )
