@@ -3,11 +3,11 @@ import styled from 'styled-components';
 import {Link} from 'react-router-dom';
 import axiosWithAuth from './utils/axiosWithAuth';
 import {MainData} from './context/MainData';
-import axiosWithAuth from './utils/axiosWithAuth';
 
 const CardForm = ()=>{
-    const {setItems}=useContext(MainData);
+    const {items, setItems}=useContext(MainData);
 
+    console.log('items from cardform', items)
     console.log('whattt is thisssssss: ', setItems)
     const InputStyled= styled.input`
     display:flex;
@@ -23,6 +23,17 @@ const initialItem ={
     itemimg: ''
   }
   const [newItems,setNewItems]=useState(initialItem);
+
+  function promoteToLender(e){
+    axiosWithAuth().
+        patch(`/roles/promote`)
+        .then(res => {
+            console.log(res)
+        })
+        .catch(err => {
+            console.log('promote error', err)
+        })
+    }
 
   const addNewItem = e =>{
     e.preventDefault();
@@ -46,10 +57,10 @@ const initialItem ={
         axiosWithAuth.
             post('items/item', newItem)
             .then(res => {
-                setItems({
-                    ...items,
-                    newItem
-                })
+                // setItems({
+                //     ...items,
+                //     newItem
+                // })
             })
             .catch(err => {
                 console.log('Post error:', err)
@@ -63,6 +74,7 @@ const initialItem ={
     return(
         <div>
             <h1>Rent Your item!</h1>
+            <button onClick={promoteToLender}>Become a Lender!</button>
             <form onSubmit={addNewItem} style={{display:'flex', flexDirection:'column', width:'400px', margin:'0 auto'}}>
                 <InputStyled
                     placeholder='Item Name'

@@ -10,7 +10,7 @@ const CardList= ()=>{
         <SearchBar />
         <Link to="/renterlogin">Signout</Link>
         <Link to="/cardform">Rent your Item!</Link>
-             {itemz.item.map(itemsss=>(
+             {itemz.items.map(itemsss=>(
                     <div key={itemsss.itemid}> 
                         <img src={itemsss.itemimg}/>
                         <div>
