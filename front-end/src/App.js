@@ -23,6 +23,7 @@ function App() {
 /////CONTEXT API/////
 {/*this is where the dummy data lives */}
 const [items, setItems]= useState([]);
+const [role, setRole] = useState();
 
 useEffect(()=>{
   axiosWithAuth()
@@ -32,6 +33,18 @@ useEffect(()=>{
       setItems(res.data)
     })
 },[])
+
+//Role setting
+useEffect(() => {
+  axiosWithAuth()
+      .get('/users/getuserinfo')
+      .then(res => {
+          console.log(res)
+          //set state of role
+      })
+      .catch(err => console.log('error', err))
+})
+
 
 
 ///// END OF CONTEXT API/////
@@ -65,6 +78,8 @@ const postReq = (values) => {
   
   .catch(err => {debugger})
 }
+
+
 
 //////////// FORM ACTIONS ////////////
 const inputChange = (name, value) => {
@@ -107,7 +122,7 @@ useEffect(() => {
 }, [forms])
 
   return (
-    <MainData.Provider value={{items}}>
+    <MainData.Provider value={{items, role}}>
       <AppDiv>
         {/* Scrolling item gallery? */}
         <Switch>
@@ -130,7 +145,8 @@ useEffect(() => {
                   </Route>
 
                   <Route path="/login">
-                      <Login formErrors={formErrors} setFormErrors={setFormErrors} />
+                    <RenterLogin />
+                      {/* <Login formErrors={formErrors} setFormErrors={setFormErrors} /> */}
                   </Route>
                   
           </Route>

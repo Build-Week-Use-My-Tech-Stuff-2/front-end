@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
 import {Link} from 'react-router-dom';
 import {MainData} from './context/MainData';
+import axiosWithAuth from './utils/axiosWithAuth';
 
 const CardForm = ()=>{
     const itemz= useContext(MainData);
@@ -29,7 +30,22 @@ const CardForm = ()=>{
     }
 
     {/*add new item using axios*/}
+    //FIGURE OUT CONTEXT API
+    const postItem = newItem => {
+        axiosWithAuth.
+            post('items/item', newItem)
+            .then(res => {
+                setItems({
+                    ...items,
+                    newItem
+                })
+            })
+            .catch(err => {
+                console.log('Post error:', err)
+            })
+    }
 
+    
 
     return(
         <div>
