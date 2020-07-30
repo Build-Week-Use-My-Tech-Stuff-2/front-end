@@ -12,26 +12,28 @@ import formSchema from './Components/Validation/formSchema'
 import RenterLogin from './renter/RenterLogin';
 import CreateForm from './renter/CreateForm';
 import axiosWithAuth from './renter/utils/axiosWithAuth';
-import {MainData} from './renter/context/MainData'
-
+import {MainData} from './renter/context/MainData';
+import {RenterData} from './renter/context/RenterData';
 import RenterDashboard from './Components/RenterDashboard';
 import {LinkSpan, AppNav, AppDiv} from './Components/StyledSubComponents'
+import CardList from './renter/CardList';
 
 
 function App() {
 
 /////CONTEXT API/////
-{/*this is where the dummy data lives */}
-const [items, setItems]= useState([]);
+{/*this is where the dummy data lives & renters data*/}
 
-useEffect(()=>{
-  axiosWithAuth()
-  .get("/items/items")
-    .then(res=>{
-      console.log('itemlistttttttt: ', res.data)
-      setItems(res.data)
-    })
-},[])
+//this is main data
+const [item, setItems]= useState([]);
+  useEffect(()=>{
+    axiosWithAuth()
+    .get("/items/items")
+      .then(res=>{
+        console.log('itemlistttttttt: ', res.data)
+        setItems(res.data)
+      })
+  },[])
 
 
 ///// END OF CONTEXT API/////
@@ -107,7 +109,8 @@ useEffect(() => {
 }, [forms])
 
   return (
-    <MainData.Provider value={{items}}>
+    <MainData.Provider value={{item, setItems}}>
+      <RenterData.Provider>
       <AppDiv>
         {/* Scrolling item gallery? */}
         <Switch>
@@ -123,8 +126,20 @@ useEffect(() => {
                   <LinkSpan><Link style={{ textDecoration: 'none', color:'white', fontWeight: "900" }} to="/">Home</Link></LinkSpan>
                   <LinkSpan><Link style={{ textDecoration: 'none', color:'white', fontWeight: "900"  }} to="/signup">Sign Up</Link></LinkSpan>
                   <LinkSpan><Link style={{ textDecoration: 'none', color:'white', fontWeight: "900"  }} to="/login">Login</Link></LinkSpan>
+                  <LinkSpan><Link style={{ textDecoration: 'none', color:'white', fontWeight: "900"  }} to="/card">Login</Link></LinkSpan>
               </AppNav>
-
+              <Route exact path="/renterlogin">
+                <RenterLogin />
+              </Route>
+              <Route exact path="/createform">
+                <CreateForm />
+              </Route>
+            <Route exact path="/cardform">
+              <CardForm />
+            </Route>
+            <Route exact path="/cardlist">
+              <CardList />
+            </Route>
                   <Route path="/signup">
                       <SignUp disabled={disabled} formErrors={formErrors} submit={submitNewUser} inputChange={inputChange} forms={forms}/>
                   </Route>
@@ -138,6 +153,7 @@ useEffect(() => {
         </Switch>
 
       </AppDiv>
+      </RenterData.Provider>
     </MainData.Provider>
   
   );
