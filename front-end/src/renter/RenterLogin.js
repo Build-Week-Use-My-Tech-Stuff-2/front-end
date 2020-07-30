@@ -26,7 +26,7 @@ const RenterLogin = () =>{
           .then(res => {
             console.log('data:', res.data)
             localStorage.setItem('token', res.data.access_token);
-            push('/cardform')
+            push('/cardlist')
           })
     }
     return(

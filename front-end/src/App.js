@@ -12,10 +12,11 @@ import formSchema from './Components/Validation/formSchema'
 import RenterLogin from './renter/RenterLogin';
 import CreateForm from './renter/CreateForm';
 import axiosWithAuth from './renter/utils/axiosWithAuth';
-import {MainData} from './renter/context/MainData'
-
+import {MainData} from './renter/context/MainData';
+import {RenterData} from './renter/context/RenterData';
 import RenterDashboard from './Components/RenterDashboard';
 import {LinkSpan, AppNav, AppDiv} from './Components/StyledSubComponents'
+import CardList from './renter/CardList';
 
 
 function App() {
@@ -138,8 +139,20 @@ useEffect(() => {
                   <LinkSpan><Link style={{ textDecoration: 'none', color:'white', fontWeight: "900" }} to="/">Home</Link></LinkSpan>
                   <LinkSpan><Link style={{ textDecoration: 'none', color:'white', fontWeight: "900"  }} to="/signup">Sign Up</Link></LinkSpan>
                   <LinkSpan><Link style={{ textDecoration: 'none', color:'white', fontWeight: "900"  }} to="/login">Login</Link></LinkSpan>
+                  <LinkSpan><Link style={{ textDecoration: 'none', color:'white', fontWeight: "900"  }} to="/card">Login</Link></LinkSpan>
               </AppNav>
-
+              <Route exact path="/renterlogin">
+                <RenterLogin />
+              </Route>
+              <Route exact path="/createform">
+                <CreateForm />
+              </Route>
+            <Route exact path="/cardform">
+              <CardForm />
+            </Route>
+            <Route exact path="/cardlist">
+              <CardList />
+            </Route>
                   <Route path="/signup">
                       <SignUp disabled={disabled} formErrors={formErrors} submit={submitNewUser} inputChange={inputChange} forms={forms}/>
                   </Route>
