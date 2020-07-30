@@ -2,6 +2,8 @@ import React from 'react'
 import { NavLink, Route } from 'react-router-dom'
 import Shop from './Shop'
 
+
+
 export default function RenterDashboard() {
     return (
         <div>

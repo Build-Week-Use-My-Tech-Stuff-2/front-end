@@ -1,7 +1,7 @@
 import React from 'react'
 import {useHistory} from 'react-router-dom'
 import styled from 'styled-components';
-import DraftsIcon from '@material-ui/icons/Drafts'
+// import DraftsIcon from '@material-ui/icons/Drafts'
 import FaceIcon from '@material-ui/icons/Face'
 import LockIcon from '@material-ui/icons/Lock'
 import {SignUpDiv, SubmitButton, LabelDiv, ErrorDiv} from './StyledSubComponents'
@@ -47,7 +47,7 @@ export default function SignUp(props) {
             <ErrorDiv><span>{formErrors.username}</span></ErrorDiv>
 
             <LabelDiv>
-            <label htmlFor="email"><DraftsIcon  float="left"/> &nbsp;Email:</label>
+            <label htmlFor="email"> &nbsp;Email:</label>
             
             <input
                 type="email"
