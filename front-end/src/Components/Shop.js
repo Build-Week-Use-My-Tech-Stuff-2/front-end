@@ -25,7 +25,6 @@ const StyledGallery = Styled.section`
 export default function Shop() {
     const [items, setItems] = useState(initItems)
     const [search, setSearch] = useState(initSearch)
-
 ///// NETWORK HELPERS /////
 const loadItems = () => {
     axios.get("http://keg8893.herokuapp.com/items/items")
@@ -47,7 +46,10 @@ const loadItems = () => {
             <StyledGallery id="gallery">
                 {
                 items.map( item => {
-                    return <Item item={item}/>
+                    return (
+          
+                          <Item item={item} key={item.id} className="hardware"/>
+                    )
                 } )
                 }
             </StyledGallery> 
