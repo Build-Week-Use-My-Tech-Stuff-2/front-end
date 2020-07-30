@@ -1,11 +1,13 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import styled from 'styled-components';
 import {Link} from 'react-router-dom';
 import axiosWithAuth from './utils/axiosWithAuth';
 import {MainData} from './context/MainData';
+import {useHistory} from 'react-router-dom'
 
 const CardForm = ()=>{
     const {items, setItems}=useContext(MainData);
+    const {push}= useHistory();
 
     console.log('items from cardform', items)
     console.log('whattt is thisssssss: ', setItems)
@@ -16,17 +18,28 @@ const CardForm = ()=>{
     padding:10px;
 `
 const initialItem ={
+    isavailable: false,
+    itemtype: '',
     itemname:'',
     itemdescr:'',
     itemlocat:'',
     itemrate:'',
     itemimg: ''
   }
+
+    
   const [newItems,setNewItems]=useState(initialItem);
+
+  //FUNCTIONS
+
+  function routeToItem(ev, item) {
+    ev.preventDefault();
+    push(`/renter-dashboard/${item.id}`);
+}
 
   function promoteToLender(e){
     axiosWithAuth().
-        patch(`/roles/promote`)
+        patch(`/roles/promote`, {})
         .then(res => {
             console.log(res)
         })
@@ -37,6 +50,7 @@ const initialItem ={
 
   const addNewItem = e =>{
     e.preventDefault();
+    console.log(newItems)
     axiosWithAuth()
         .post("/items/item", newItems)
         .then(res=>{
@@ -57,6 +71,7 @@ const initialItem ={
         axiosWithAuth.
             post('items/item', newItem)
             .then(res => {
+                console.log(res)
                 // setItems({
                 //     ...items,
                 //     newItem
@@ -69,6 +84,14 @@ const initialItem ={
 
 
 
+    useEffect(() => {
+        axiosWithAuth()
+            .get('users/getuserinfo')
+            .then(res => {
+                console.log('user info',res)
+            })
+            .catch(err => console.log(err))
+    }, [])
     {/*add new item using axios*/}
    
     return(
