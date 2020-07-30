@@ -6,17 +6,32 @@ display: flex;
 flex-direction: column;
 background-color: ivory;
 max-width: 15%;
+height: 125px;
+width: 125px;
+margin: 1%;
+
+    img{
+        height: 70%;
+         width: 100%;
+    }
+
+    h3{
+        height: 10%;
+    }
+
+    h4{ 
+        height: 10%;
+    }
 `;
 
-export default function Item() {
+export default function Item({item}) {
+
     return (
         <ItemDiv>
-            <img src={"https://picsum.photos/200"}></img>
-            <h3>Name:</h3>
-            <h4>Price:</h4>
-            {/* Availability [create a component?] [needs state] */}
-            {/* Button routes to a checkout screen for buyers, edit details for renters 
-            (On another note, for readability's sake we should change 'renters' to 'sellers') */}
+            <img src={item.itemimg}></img>
+            <h3>{`Name: ${item.itemname}`}</h3>
+            <h4>{`Price: ${item.itemrate}`}</h4>
+
         </ItemDiv>
     )
 }

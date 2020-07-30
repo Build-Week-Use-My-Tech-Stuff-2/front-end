@@ -22,18 +22,30 @@ import CardList from './renter/CardList';
 function App() {
 
 /////CONTEXT API/////
-{/*this is where the dummy data lives & renters data*/}
+{/*this is where the dummy data lives */}
+const [items, setItems]= useState([]);
+const [role, setRole] = useState();
 
-//this is main data
-const [item, setItems]= useState([]);
-  useEffect(()=>{
-    axiosWithAuth()
-    .get("/items/items")
-      .then(res=>{
-        console.log('itemlistttttttt: ', res.data)
-        setItems(res.data)
+useEffect(()=>{
+  axiosWithAuth()
+  .get("/items/items")
+    .then(res=>{
+      console.log('itemlistttttttt: ', res.data)
+      setItems(res.data)
+    })
+},[])
+
+//Role setting
+useEffect(() => {
+  axiosWithAuth()
+      .get('/users/getuserinfo')
+      .then(res => {
+          console.log(res)
+          //set state of role
       })
-  },[])
+      .catch(err => console.log('error', err))
+})
+
 
 
 ///// END OF CONTEXT API/////
@@ -67,6 +79,8 @@ const postReq = (values) => {
   
   .catch(err => {debugger})
 }
+
+
 
 //////////// FORM ACTIONS ////////////
 const inputChange = (name, value) => {
@@ -109,8 +123,7 @@ useEffect(() => {
 }, [forms])
 
   return (
-    <MainData.Provider value={{item, setItems}}>
-      <RenterData.Provider>
+    <MainData.Provider value={{items, role}}>
       <AppDiv>
         {/* Scrolling item gallery? */}
         <Switch>
@@ -145,7 +158,8 @@ useEffect(() => {
                   </Route>
 
                   <Route path="/login">
-                      <Login formErrors={formErrors} setFormErrors={setFormErrors} />
+                    <RenterLogin />
+                      {/* <Login formErrors={formErrors} setFormErrors={setFormErrors} /> */}
                   </Route>
                   
           </Route>
@@ -153,7 +167,6 @@ useEffect(() => {
         </Switch>
 
       </AppDiv>
-      </RenterData.Provider>
     </MainData.Provider>
   
   );

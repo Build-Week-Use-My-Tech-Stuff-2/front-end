@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import {Link} from 'react-router-dom';
 import axiosWithAuth from './utils/axiosWithAuth';
 import {MainData} from './context/MainData';
+import axiosWithAuth from './utils/axiosWithAuth';
 
 const CardForm = ()=>{
     const {setItems}=useContext(MainData);
@@ -38,8 +39,24 @@ const initialItem ={
     const handleChange = e =>{
         setNewItems({...newItems,[e.target.name]: e.target.value })
     }
-    
 
+    {/*add new item using axios*/}
+    //FIGURE OUT CONTEXT API
+    const postItem = newItem => {
+        axiosWithAuth.
+            post('items/item', newItem)
+            .then(res => {
+                setItems({
+                    ...items,
+                    newItem
+                })
+            })
+            .catch(err => {
+                console.log('Post error:', err)
+            })
+    }
+
+    
 
     {/*add new item using axios*/}
    

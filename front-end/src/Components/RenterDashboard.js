@@ -14,7 +14,7 @@ export default function RenterDashboard() {
 
                 <h1>This is the Dashboard</h1>
             <Route path="/dashboard/shop">
-                <Shop/>
+                <Shop />
             </Route>
         </div>
     )
