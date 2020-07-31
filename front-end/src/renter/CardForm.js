@@ -64,6 +64,7 @@ const CardForm = ()=>{
           .patch(`/items/item/${itemToEdit.itemid}`, itemToEdit)
           .then(res => {
             getUserInfo();
+            window.location.reload();
           })
           .catch(err => console.log(err));
     };
@@ -87,6 +88,7 @@ const CardForm = ()=>{
             .patch(`/roles/promote`, {})
             .then(res => {
                 console.log('promote',res)
+                window.location.reload();
             })
             .catch(err => {
                 console.log('promote error', err)
@@ -105,7 +107,7 @@ const CardForm = ()=>{
     
     const logOut= ()=>{
     localStorage.removeItem("token");
-    push('/app')
+    push('/')
     }
     return(
         <div>
@@ -240,7 +242,6 @@ const CardForm = ()=>{
                     </form>
                 )}
            
-            <button>signout</button>
         </div>
     )
 }

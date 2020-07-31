@@ -21,21 +21,27 @@ const CreateForm = () =>{
             .then(res =>{
                 console.log("login page data: ", res)
                 localStorage.setItem("token", res.data.access_token)
-                 push("/renterlogin")
+                 push("/")
             })
             .catch(err=> console.log("this is the error from login: ", err))
     }
     return(
+        <>
+        <h1>Create Renter Account!</h1>
         <div>
-            <h1>Create Renter Account!</h1>
+            
             <form onSubmit={handleSubmit}>
-                <input
+                <div> 
+                    <input
                     placeholder="username"
                     type="text"
                     name="username"
                     onChange={handleChange}
                     value={cred.username}
-                />
+                     />
+                </div>
+               
+                <div>
                 <input
                     placeholder="password"
                     type="password"
@@ -43,16 +49,25 @@ const CreateForm = () =>{
                     onChange={handleChange}
                     value={cred.password}
                 />
-                <input 
-                    placeholder="primaryemail"
-                    type="email"
-                    name="primaryemail"
-                    onChange={handleChange}
-                    value={cred.primaryemail}
-                />
-                <button type="submit">Create Account</button>
+                </div>
+               
+                <div>
+                    <input 
+                        placeholder="primaryemail"
+                        type="email"
+                        name="primaryemail"
+                        onChange={handleChange}
+                        value={cred.primaryemail}
+                    />
+                </div>
+                
+                <div>
+                     <button type="submit">Create Account</button>
+                </div>
+                
             </form>
         </div>
+        </>
     )
 }
 export default CreateForm;

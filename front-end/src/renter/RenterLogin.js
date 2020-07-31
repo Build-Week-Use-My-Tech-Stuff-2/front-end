@@ -30,9 +30,12 @@ const RenterLogin = () =>{
           })
     }
     return(
-        <div>
-            <h1>Renter's Login</h1>
+        <>
+        <h1>Renter's Login</h1>
+        <div style={{background:'blue', display:'flex', flexDirection:'column'}}>
+            
             <form onSubmit={handleSubmit}>
+                <div>
                 <input
                     placeholder="username"
                     type="text"
@@ -40,6 +43,8 @@ const RenterLogin = () =>{
                     onChange={handleChange}
                     value={cred.username}
                 />
+                </div>
+                <div>
                 <input
                     placeholder="password"
                     type="password"
@@ -47,10 +52,18 @@ const RenterLogin = () =>{
                     onChange={handleChange}
                     value={cred.password}
                 />
-                <button type="submit">Login</button>
+
+                </div>
+                <div>
+                    <button type="submit">Login</button>
+                </div>
+                <div>
                 <Link to="/createform">Create Acount</Link>
+                </div>
+                
             </form>
         </div>
+        </>
     )
 }
 export default RenterLogin;
