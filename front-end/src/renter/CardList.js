@@ -1,15 +1,22 @@
 import React, { useContext } from 'react';
 import {MainData} from './context/MainData';
-import SearchBar from  '../Components/SearchBar';
-import {Link} from 'react-router-dom'
+import {LinkSpan, AppNav} from '../Components/StyledSubComponents';
+import {Link,useHistory} from 'react-router-dom';
 const CardList= ()=>{
     const itemz = useContext(MainData);
     console.log('waaaaejhedwjed: ', itemz)
+    const {push}= useHistory();
+    const logOut= ()=>{
+    localStorage.removeItem("token");
+    push('/')
+    }
     return(
-        <>
-        <SearchBar />
-        <Link to="/renterlogin">Signout</Link>
-        <Link to="/cardform">Rent your Item!</Link>
+        <div>
+             <AppNav style={{marginBottom:'20px'}}>
+            <LinkSpan><Link style={{ textDecoration: 'none', color:'white', fontWeight: "900"  }} to="/cardform">DashBoard</Link></LinkSpan>
+            <LinkSpan><Link onClick={logOut} style={{ textDecoration: 'none', color:'white', fontWeight: "900"  }}>Sign out</Link></LinkSpan>
+            <LinkSpan><Link style={{ textDecoration: 'none', color:'white', fontWeight: "900"  }} to="/cardlist">Shop</Link></LinkSpan>
+        </AppNav>
              {itemz.items.map(itemsss=>(
                     <div key={itemsss.itemid}> 
                         <img src={itemsss.itemimg}/>
@@ -23,7 +30,7 @@ const CardList= ()=>{
                     </div>
                 ))}
             
-        </>
+        </div>
     )
 }
 export default CardList;
